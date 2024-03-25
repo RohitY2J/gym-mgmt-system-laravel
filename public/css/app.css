@@ -21,3 +21,18 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+
+td {
+    text-align: center;
+}
+
+
+
+table,
+th,
+td {
+    border: 1px solid #96D4D4;
+    border-collapse: collapse;
+    padding: 5px;
+}

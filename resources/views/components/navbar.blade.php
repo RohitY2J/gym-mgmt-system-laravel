@@ -5,6 +5,7 @@
     ['text' => 'Contact', 'url' => url('/contact')],
     ['text' => 'About', 'url' => '#about'],
     ['text' => 'Login', 'url' => '#'],
+    ['text' => 'Booking History', 'url' => '/booking']
     ];
     @endphp
 
