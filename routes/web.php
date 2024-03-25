@@ -18,5 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/contact', function(){
-    return view('contact');
+
+    $phNumber = request('phonenumber');
+
+    return view('contact',
+    [
+        'phonenumber' => $phNumber,
+    ]
+    );
 });
