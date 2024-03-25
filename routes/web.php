@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +19,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/contact', function(){
-
-    $phNumber = request('phonenumber');
-
-    return view('contact',
-    [
-        'phonenumber' => $phNumber,
-    ]
-    );
-});
+Route::get('/contact', [LoginController::class,'index']);
