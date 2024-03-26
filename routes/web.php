@@ -22,3 +22,4 @@ Route::get('/', function () {
 
 Route::get('/contact', [LoginController::class,'index']);
 Route::get('/booking', [BookingHistoryController::class,'getBookingHistories']);
+Route::get('/user', [LoginController::class, 'createUser']);
