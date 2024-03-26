@@ -1,27 +1,23 @@
-@extends('layouts.layout')
+@extends('layouts.app')
+
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-<x-navbar></x-navbar>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-
-@if(session('msg'))
-    <h1>{{ session('msg') }} </h1>
-@else
-<h2>User Registration Form</h2>
-
-<form action="/user" method="GET">
-  <label for="username">Username:</label><br>
-  <input type="text" id="username" name="username" required><br><br>
-
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" required><br><br>
-
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password" required><br><br>
-
-  <label for="confirm_password">Confirm Password:</label><br>
-  <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-
-  <input type="submit" value="Register">
-</form>
-@endif
+                    {{ __('You are logged in!') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
