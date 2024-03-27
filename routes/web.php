@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingHistoryController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -25,7 +26,7 @@ Route::get('/contact', function(){
 Route::get('/booking', [BookingHistoryController::class,'getBookingHistories'])->name('booking')->middleware('auth');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/admin/dashboard',function(){
     return view('admin.dashboard');

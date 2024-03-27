@@ -39,6 +39,24 @@
                         ['text' => 'Home', 'url' => 'welcome.home'],
                         ['text' => 'Contact', 'url' => 'welcome.contact'],
                         //['text' => 'About', 'url' => 'about'],
+                        //['text' => 'Booking History', 'url' => 'booking']
+                        ];
+                        @endphp
+
+
+                        @foreach ($menuItems as $item)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route($item['url']) }}">{{ $item['text'] }}
+                            </a>
+                        </li>
+                        @endforeach
+
+                        @auth
+                        @php
+                        $menuItems = [
+                        //['text' => 'Home', 'url' => 'welcome.home'],
+                        //['text' => 'Contact', 'url' => 'welcome.contact'],
+                        //['text' => 'About', 'url' => 'about'],
                         ['text' => 'Booking History', 'url' => 'booking']
                         ];
                         @endphp
@@ -50,6 +68,8 @@
                             </a>
                         </li>
                         @endforeach
+                        @endauth
+                        
 
                     </ul>
 
