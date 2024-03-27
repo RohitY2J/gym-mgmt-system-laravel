@@ -17,12 +17,12 @@ use App\Http\Controllers\BookingHistoryController;
 
 Route::get('/', function () {
     return view('home_custom');
-});
+})->name('welcome.home');
 
 Route::get('/contact', function(){
     return view('contact');
-});
-Route::get('/booking', [BookingHistoryController::class,'getBookingHistories'])->middleware('auth');
+})->name('welcome.contact');
+Route::get('/booking', [BookingHistoryController::class,'getBookingHistories'])->name('booking')->middleware('auth');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

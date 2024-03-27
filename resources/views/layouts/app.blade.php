@@ -36,17 +36,17 @@
                     <ul class="navbar-nav me-auto">
                         @php
                         $menuItems = [
-                        ['text' => 'Home', 'url' => url('/')],
-                        ['text' => 'Contact', 'url' => url('/contact')],
-                        ['text' => 'About', 'url' => '#about'],
-                        ['text' => 'Booking History', 'url' => '/booking']
+                        ['text' => 'Home', 'url' => 'welcome.home'],
+                        ['text' => 'Contact', 'url' => 'welcome.contact'],
+                        //['text' => 'About', 'url' => 'about'],
+                        ['text' => 'Booking History', 'url' => 'booking']
                         ];
                         @endphp
 
 
                         @foreach ($menuItems as $item)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ $item['url'] }}">{{ $item['text'] }}
+                            <a class="nav-link" href="{{ route($item['url']) }}">{{ $item['text'] }}
                             </a>
                         </li>
                         @endforeach
