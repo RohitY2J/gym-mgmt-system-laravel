@@ -1,6 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('content')
 
-<x-navbar></x-navbar>
-<h1>Contacts</h1>
-<p> {{ $phonenumber }}</p>
+<div class="container">
+    <h1>Contacts</h1>
+    
+</div>
+
+@endsection

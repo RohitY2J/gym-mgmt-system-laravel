@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BookingHistoryController;
 
 
@@ -20,9 +19,10 @@ Route::get('/', function () {
     return view('home_custom');
 });
 
-Route::get('/contact', [LoginController::class,'index']);
-Route::get('/booking', [BookingHistoryController::class,'getBookingHistories']);
-Route::get('/user', [LoginController::class, 'createUser']);
+Route::get('/contact', function(){
+    return view('contact');
+});
+Route::get('/booking', [BookingHistoryController::class,'getBookingHistories'])->middleware('auth');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
