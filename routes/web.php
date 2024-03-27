@@ -26,3 +26,7 @@ Route::get('/booking', [BookingHistoryController::class,'getBookingHistories'])-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/dashboard',function(){
+    return view('admin.dashboard');
+})->name('admin.dashboard');
