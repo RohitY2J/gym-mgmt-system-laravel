@@ -85,7 +85,7 @@
                             data-bs-parent="#sidebar">
                             <!-- <i class="bi bi-bootstrap">
                             </i> -->
-                            <span>Package</span>
+                            <span>Booking History</span>
                         </a>
                         <a href="{{route('admin.report')}}" class="list-group-item d-inline-block text-truncate border-0 pt-3"
                             data-bs-parent="#sidebar">

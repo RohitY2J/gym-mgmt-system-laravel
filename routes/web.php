@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PackageTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingHistoryController;
 use App\Http\Controllers\HomeController;
@@ -35,9 +36,7 @@ Route::get('/admin/dashboard',function(){
 
 Route::get('/admin/category', [CategoryController::class,'getCategory'])->name('admin.category')->middleware('auth','admin');
 
-Route::get('/admin/package-type', function(){
-    return view('admin.package_type');
-})->name('admin.package_type')->middleware('auth','admin');
+Route::get('/admin/package-type', [PackageTypeController::class,'getPackageTypeView'])->name('admin.package_type')->middleware('auth','admin');
 
 Route::get('/admin/package', function(){
     return view('admin.package');

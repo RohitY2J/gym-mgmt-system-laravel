@@ -34,3 +34,8 @@ td {
     padding-bottom: 5px;
 }
 
+.text-button{
+    border-width: 0px;
+    color: blue;
+}
+

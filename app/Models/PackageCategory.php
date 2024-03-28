@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PackageCategory extends Model
 {
     //use HasFactory;
+
+    protected $table = 'membership_package_category';
 }
