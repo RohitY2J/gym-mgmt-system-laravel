@@ -134,15 +134,18 @@
                     <table style="width: 100%;">
                         <tr>
                             <th>Id</th>
-                            <th>Title</th>
-                            <th>Created At</th>
-                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Duration</th>
+                            <th>Category</th>
                         </tr>
                         @foreach($packages as $package)
                         <tr>
                             <td>{{$package->id}}</td>
-                            <td>{{$package->id}}</td>
-                            <td>{{$package->created_at}}</td>
+                            <td>{{$package->name}}</td>
+                            <td>{{$package->price}}</td>
+                            <td>{{$package->duration}} {{$TimeUnit[$package->time_unit]}}</td>
+                            <td>{{$package->category}}</td>
                             <td>
                                 <button class="btn btn-danger">Delete</button>
                             </td>

@@ -13,11 +13,19 @@ class CategoryController extends Controller
         return view('admin.category', ['categories' => $categories]);
     }
 
+    public function deleteCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return response()->json(['success' => true]);
+    }
+
     public function addCategory(Request $request)
     {
         $this->validateAddCategory($request);
         Category::create([
-            "title"=> $request->category,
+            "title"=> $request->title,
         ]);
 
         // Flash a success message to the session

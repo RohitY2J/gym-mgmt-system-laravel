@@ -6,12 +6,16 @@ use App\Models\Category;
 use App\Models\PackageCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class PackageTypeController extends Controller
 {
     public function getPackageTypeView(){
         $categories = Category::all();
-        $packages = PackageCategory::all();
+        $packages = DB::table('membership_package_category')
+            ->join('categories', 'membership_package_category.category_id', '=', 'categories.id')
+            ->select('membership_package_category.*','categories.title as category')
+            ->get();
 
         return view("admin.package_type",["categories"=>$categories, "packages"=>$packages]);
     }

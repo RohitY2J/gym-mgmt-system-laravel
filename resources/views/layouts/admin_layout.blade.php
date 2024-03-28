@@ -13,6 +13,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
@@ -50,7 +51,7 @@
                             </i> -->
                             <span>Dashboard</span>
                         </a>
-                        <a data-bs-toggle="collapse"
+                        <a href="" data-bs-toggle="collapse"
                             class="list-group-item d-inline-block text-truncate border-0 pt-3" data-bs-parent="#sidebar"
                             data-bs-target="#category-collapse" aria-expanded="true" aria-controls="category-collapse">
                             Category
@@ -65,7 +66,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a data-bs-toggle="collapse"
+                        <a href="" data-bs-toggle="collapse"
                             class="list-group-item d-inline-block text-truncate border-0 pt-3" data-bs-parent="#sidebar"
                             data-bs-target="#package-type-collapse" aria-expanded="true"
                             aria-controls="package-type-collapse">
