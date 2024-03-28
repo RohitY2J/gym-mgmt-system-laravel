@@ -5,7 +5,8 @@
 <x-modal-form-popup>
     Package Type
     <x-slot name="bodySlot">
-
+    <form method="POST" action="{{ route('admin.package_type.addpackage') }}" id="myForm">
+        @csrf
         <div>
             <label for="category"> Category </label>
             <select name="category" class="form-select @error('category') is-invalid @enderror" id="category" required>
@@ -90,13 +91,22 @@
                 </div>
             </div>
         </div>
+    
+        </form>
+
 
     </x-slot>
 
-    <x-slot name="buttonSlot"> 
-        <button class="btn btn-success"> Save </button>
+    <x-slot name="buttonSlot" > 
+        <button type="submit" class="btn btn-success" id="submitButton"> Save </button>
     </x-slot>
 </x-modal-form-popup>
+
+<script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+        document.getElementById('myForm').submit();
+    });
+</script>
 
 <div class="container">
     <div class="row justify-content-left">

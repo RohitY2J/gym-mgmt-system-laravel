@@ -47,3 +47,4 @@ Route::get('/admin/report', function(){
 })->name('admin.report')->middleware('auth','admin');
 
 Route::post('/admin/category/addcategory', [CategoryController::class,'addCategory'])->name('admin.category.addcategory')->middleware('auth','admin');
+Route::post('/admin/package-type/addpackagetype', [PackageTypeController::class,'addPackageType'])->name('admin.package_type.addpackage')->middleware('auth','admin');
