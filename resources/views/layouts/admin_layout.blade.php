@@ -43,21 +43,21 @@
                             </div>
                         </nav>
 
-                        <a href="#"
+                        <a href="{{route('admin.dashboard')}}"
                             class="list-group-item border-end-0 d-inline-block text-truncate border-bottom-0 pt-4"
                             data-bs-parent="#sidebar">
                             <!-- <i class="bi bi-bootstrap">
                             </i> -->
                             <span>Dashboard</span>
                         </a>
-                        <a href="#" data-bs-toggle="collapse"
+                        <a data-bs-toggle="collapse"
                             class="list-group-item d-inline-block text-truncate border-0 pt-3" data-bs-parent="#sidebar"
                             data-bs-target="#category-collapse" aria-expanded="true" aria-controls="category-collapse">
                             Category
                         </a>
                         <div class="collapse" id="category-collapse" style="margin-left: 15px;">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mb-0">
-                                <li><a href="#" class="list-group-item 
+                                <li><a href="{{route('admin.category')}}" class="list-group-item 
                                             d-inline-block 
                                             text-truncate 
                                             border-0 
@@ -65,15 +65,15 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="#" data-bs-toggle="collapse"
+                        <a data-bs-toggle="collapse"
                             class="list-group-item d-inline-block text-truncate border-0 pt-3" data-bs-parent="#sidebar"
-                            data-bs-target="#dashboard-collapse" aria-expanded="true"
-                            aria-controls="dashboard-collapse">
+                            data-bs-target="#package-type-collapse" aria-expanded="true"
+                            aria-controls="package-type-collapse">
                             Package Type
                         </a>
-                        <div class="collapse" id="dashboard-collapse" style="margin-left: 15px;">
+                        <div class="collapse" id="package-type-collapse" style="margin-left: 15px;">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mb-0">
-                                <li><a href="#" class="list-group-item 
+                                <li><a href="{{route('admin.package_type')}}" class="list-group-item 
                                             d-inline-block 
                                             text-truncate 
                                             border-0 
@@ -81,13 +81,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="#" class="list-group-item d-inline-block text-truncate border-0 pt-3"
+                        <a href="{{route('admin.package')}}" class="list-group-item d-inline-block text-truncate border-0 pt-3"
                             data-bs-parent="#sidebar">
                             <!-- <i class="bi bi-bootstrap">
                             </i> -->
                             <span>Package</span>
                         </a>
-                        <a href="#" class="list-group-item d-inline-block text-truncate border-0 pt-3"
+                        <a href="{{route('admin.report')}}" class="list-group-item d-inline-block text-truncate border-0 pt-3"
                             data-bs-parent="#sidebar">
                             Report
                         </a>

@@ -7,6 +7,16 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
+
+import $ from 'jquery';
+//window.jQuery = $;
+
+// ///import './bootstrap';
+// import 'jquery-ui/dist/jquery-ui'
+// import 'jquery-ui/dist/themes/base/jquery-ui.css'
+
+
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
