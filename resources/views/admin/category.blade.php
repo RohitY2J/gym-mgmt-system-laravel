@@ -15,11 +15,11 @@
                         <div class="row mb-3">
 
                             <div class="col-md-12">
-                                <input id="category" type="text"
-                                    class="form-control @error('category') is-invalid @enderror" name="category"
+                                <input id="title" type="text"
+                                    class="form-control @error('title') is-invalid @enderror" name="title"
                                     required autofocus>
 
-                                @error('category')
+                                @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

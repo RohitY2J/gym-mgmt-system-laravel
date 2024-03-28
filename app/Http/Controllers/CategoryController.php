@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -26,8 +27,15 @@ class CategoryController extends Controller
     protected function validateAddCategory(Request $request)
     {
         $request->validate([
-            'category' => 'required|string',
-            //'password' => 'required|string',
+            'title' => [
+                'required',
+                'string',
+                Rule::unique('categories')->where(function ($query) use ($request) {
+                    return $query;
+                }),
+            ],
+        ], [
+            'title.unique' => 'The category with given title already exists.',
         ]);
     }
 }
