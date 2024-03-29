@@ -39,3 +39,8 @@ td {
     color: blue;
 }
 
+.no-border{
+    border-width: 0px;
+    background: none;
+}
+

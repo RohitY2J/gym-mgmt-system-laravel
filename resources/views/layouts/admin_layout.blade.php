@@ -82,7 +82,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="{{route('admin.package')}}" class="list-group-item d-inline-block text-truncate border-0 pt-3"
+                        <a href="{{route('admin.bookings')}}" class="list-group-item d-inline-block text-truncate border-0 pt-3"
                             data-bs-parent="#sidebar">
                             <!-- <i class="bi bi-bootstrap">
                             </i> -->
