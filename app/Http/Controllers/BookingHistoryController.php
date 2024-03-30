@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BookingHistory;
 use App\Models\PackageCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
@@ -37,10 +38,14 @@ class BookingHistoryController extends Controller
         return view('booking_history', ['usersWithBookingHistory' => $usersWithBookingHistory, 'statuses' => $this->statuses]);
     }
 
-    public function getAllBookingHistories()
+    public function getAllBookingHistories(Request $request)
     {
         $categories = Category::all();
-        $usersWithBookingHistory = DB::table('booking_history')
+
+        $usersWithBookingHistory = $request->session()->get('usersWithBookingHistory');
+
+        if($usersWithBookingHistory == null){
+            $usersWithBookingHistory = DB::table('booking_history')
             ->join('users', 'booking_history.user', '=', 'users.id')
             ->join('membership_package_category', 'booking_history.package_category', '=', 'membership_package_category.id')
             ->select(
@@ -49,12 +54,68 @@ class BookingHistoryController extends Controller
                 'users.email as email',
                 'membership_package_category.price as packageprice',
                 'membership_package_category.name as packagename'
-            )
-            ->get();
+            )->get();
+        }
+        
 
+        $users = User::where('role', '0')->get();
+        $payments = [
+            ["value"=>"No Payment", "key"=>0], 
+            ["value"=>"Partial Payment", "key"=>2], 
+            ["value"=>"Full Payment", "key"=>1]];
 
+        $activeStatus = [
+            ["value"=>"Active", "key"=>1], 
+            ["value"=>"Inactive", "key"=>0]];
 
-        return view('admin.booking_history', ['usersWithBookingHistory' => $usersWithBookingHistory, 'statuses' => $this->statuses, 'categories' => $categories]);
+        return view('admin.booking_history', ['usersWithBookingHistory' => $usersWithBookingHistory, 
+        'statuses' => $this->statuses,
+        'users' => $users, 
+        "payments" => $payments,
+        'activeStatus' => $activeStatus,
+        'categories' => $categories]);
+    }
+
+    public function getAllBookingHistoriesFilter(Request $request)
+    {
+        $usersWithBookingHistoryTemp = DB::table('booking_history')
+            ->join('users', 'booking_history.user', '=', 'users.id')
+            ->join('membership_package_category', 'booking_history.package_category', '=', 'membership_package_category.id')
+            ->select(
+                'booking_history.*',
+                'users.name as username',
+                'users.email as email',
+                'membership_package_category.price as packageprice',
+                'membership_package_category.name as packagename'
+            );
+                // Check if specific parameters exist in the request and apply filters accordingly
+        if ($request->payment) {
+            if($request->payment == 1)
+                $usersWithBookingHistoryTemp->where('booking_history.is_payment_complete', $request->payment);
+            else if($request->payment == 2)
+            {
+                $usersWithBookingHistoryTemp->where('booking_history.payment_amount','>', 0);
+            }
+            else{
+                $usersWithBookingHistoryTemp->where('booking_history.payment_amount', 0);
+            }
+        }
+
+        if ($request->user) {
+            $usersWithBookingHistoryTemp->where('booking_history.user', $request->user);
+        }
+
+        if ($request->active) {
+            $usersWithBookingHistoryTemp->where('booking_history.active_status', $request->user);
+        }
+
+        if($request->pagination){
+            $usersWithBookingHistoryTemp->limit($request->pagination);
+        }
+        $usersWithBookingHistory = $usersWithBookingHistoryTemp->get();
+        // Redirect to the getAllBookingHistories method with the filtered data
+        return response()->json(['usersWithBookingHistory' => $usersWithBookingHistory]);
+
     }
 
     public function addPayment(Request $request)

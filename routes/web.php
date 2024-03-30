@@ -39,6 +39,7 @@ Route::get('/admin/category', [CategoryController::class,'getCategory'])->name('
 Route::get('/admin/package-type', [PackageTypeController::class,'getPackageTypeView'])->name('admin.package_type')->middleware('auth','admin');
 
 Route::get('/admin/bookings', [BookingHistoryController::class, 'getAllBookingHistories'])->name('admin.bookings')->middleware('auth','admin');
+Route::post('/admin/bookings/filter', [BookingHistoryController::class, 'getAllBookingHistoriesFilter'])->name('admin.bookings.filter')->middleware('auth','admin');
 
 Route::get('/admin/report', function(){
     return view('admin.report');
