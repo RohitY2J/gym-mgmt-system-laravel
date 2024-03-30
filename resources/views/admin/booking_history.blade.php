@@ -23,6 +23,36 @@
                 </span>
                 @enderror
             </div>
+
+            <div class="mt-3">
+                <label for="startDate"> Start Date </label>
+
+                <div class="">
+                    <input id="startDate" type="date" class="form-control @error('startDate') is-invalid @enderror"
+                        name="startDate" required autocomplete="startDate">
+
+                    @error('startDate')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label for="endDate"> End Date </label>
+
+                <div class="">
+                    <input id="endDate" type="date" class="form-control @error('endDate') is-invalid @enderror"
+                        name="endDate" required autocomplete="endDate">
+
+                    @error('endDate')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
         </form>
 
 
@@ -49,10 +79,10 @@
                         </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ms-auto">
+                        <!-- <ul class="navbar-nav ms-auto">
                             <button class="text-button"> Add
                             </button>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -70,20 +100,26 @@
                             <th>Expiry Date</th>
                         </tr>
                         @foreach($usersWithBookingHistory as $bookingHistory)
-                        <tr>
+                        <tr style="{{ $bookingHistory->active_status == 1 ? 'background:#7cf28e;' : '' }}">
                             <td>{{$bookingHistory->id}}</td>
                             <td>{{$bookingHistory->created_at ? $bookingHistory->created_at : 'N/A'}}</td>
                             <td>{{$bookingHistory->username}}</td>
                             <td>{{$bookingHistory->email}}</td>
                             <td>{{$bookingHistory->packagename}}</td>
                             <td>{{$bookingHistory->packageprice}}</td>
-                            <td>{{$bookingHistory->payment_amount}}</td>
+                            <td
+                                style="background: {{ $bookingHistory->payment_amount == $bookingHistory->packageprice ? '' : 'red' }}">
+                                {{$bookingHistory->payment_amount}}
+                            </td>
                             <td>{{$bookingHistory->description}}</td>
                             <td>{{$bookingHistory->starting_date ? $bookingHistory->starting_date : 'N/A'}}</td>
                             <td>{{ $bookingHistory->ending_date ? $bookingHistory->ending_date : 'N/A' }}</td>
 
                             <td>
-                                <button class="no-border"><i class="bi bi-trash" style="color:red"></i></button>
+                                <button class="no-border" {{ $bookingHistory->active_status == 1 ? 'disabled' : '' }}>
+                                    <i class="bi bi-trash"
+                                        style="color: {{ $bookingHistory->active_status == 1 ? 'grey' : 'red' }}"></i>
+                                </button>
                                 <button class="no-border" data-bs-toggle="modal" data-bs-target="#formModal"><i
                                         class="bi bi-pen edit-btn" style="color:green"></i></button>
                             </td>

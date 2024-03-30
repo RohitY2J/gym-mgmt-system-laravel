@@ -19,8 +19,8 @@ return new class extends Migration
             $table->boolean('is_payment_complete')->default(false);
             $table->integer('payment_amount')->default(0);
             $table->integer('active_status')->default(0);
-            $table->timestamp('starting_date')->nullable();
-            $table->timestamp('ending_date')->nullable();
+            $table->date('starting_date')->nullable();
+            $table->date('ending_date')->nullable();
         });
     }
 

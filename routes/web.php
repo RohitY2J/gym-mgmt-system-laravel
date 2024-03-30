@@ -47,4 +47,4 @@ Route::get('/admin/report', function(){
 Route::post('/admin/category/addcategory', [CategoryController::class,'addCategory'])->name('admin.category.addcategory')->middleware('auth','admin');
 Route::delete('/admin/category/deletecategory/{id}',[CategoryController::class,'deleteCategory'])->name('admin.category.deletecategory')->middleware('auth','admin');
 Route::post('/admin/package-type/addpackagetype', [PackageTypeController::class,'addPackageType'])->name('admin.package_type.addpackage')->middleware('auth','admin');
-Route::post('/admin/booking-history/addpayment', [BookingHistoryController::class, 'addPayment'])->name('admin.booking_history.add_payment')->middleware('auth','admin');
+Route::post('/admin/bookings/addpayment', [BookingHistoryController::class, 'addPayment'])->name('admin.booking_history.add_payment')->middleware('auth','admin');
