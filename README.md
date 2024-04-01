@@ -1,6 +1,6 @@
 ## Configuration
-php : 8.0.30
-composer : 2.7.2
+php : 8.0.30 <br/>
+composer : 2.7.2 <br/>
 node: 14.20.0
 
 ## Project Setup
