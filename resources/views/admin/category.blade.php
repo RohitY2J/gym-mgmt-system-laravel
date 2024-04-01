@@ -87,7 +87,7 @@
             console
             var categoryId = $(this).data('id');
             $.ajax({
-                url: 'http://127.0.0.1:8000/admin/category/deletecategory/' + categoryId,
+                url: '/admin/category/deletecategory/' + categoryId,
                 type: 'DELETE',
                 data: {
                     "_token": "{{ csrf_token() }}"
