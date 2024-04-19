@@ -9,6 +9,8 @@ b. npm install
 c. in one cmd: php artisan serve
 d. in another: npm run dev
 e. change sql connection(.env file)
+f. change database name
+g. run migration scription: php artisan migrate
 
 ## Packages used
 a. laravel/ui
