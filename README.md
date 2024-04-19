@@ -3,6 +3,10 @@ php : 8.0.30 <br/>
 composer : 2.7.2 <br/>
 node: 14.20.0
 
+After adding angular:
+node version: v20.12.2
+npm version: 10.5.0
+
 ## Project Setup
 a. composer install
 b. npm install
