@@ -1,0 +1,52 @@
+<div id="app">
+  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">
+        Laravel
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left Side Of Navbar -->
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item" *ngFor="let item of menuItems">
+            <a class="nav-link" [routerLink]="[item.url]">{{ item.text }}</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ms-auto">
+          <!-- Authentication Links -->
+          <!-- <ng-container *ngIf="!authService.isAuthenticated()">
+            <li class="nav-item" *ngIf="hasLoginRoute">
+              <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="hasRegisterRoute">
+              <a class="nav-link" routerLink="/register">Register</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="authService.isAuthenticated()">
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ authService.userName }}
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+              </div>
+            </li>
+          </ng-container> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="py-4">
+    <router-outlet></router-outlet>
+  </main>
+</div>

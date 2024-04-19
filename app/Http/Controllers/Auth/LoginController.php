@@ -51,7 +51,10 @@ class LoginController extends Controller
         if ($user->role == 1) {
             return redirect()->route('admin.dashboard'); // Redirect admin to dashboard
         }
+        else{
+            return redirect()->route('welcome.home');
+        }
 
-        return redirect()->intended($this->redirectTo); // Redirect normal user to default path
+        //return redirect()->intended($this->redirectTo); // Redirect normal user to default path
     }
 }
