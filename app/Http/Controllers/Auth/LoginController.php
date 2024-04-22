@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use \Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -40,46 +41,28 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * Customize the redirect path after login based on user role.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function authenticated(Request $request, $user)
-    {
-        if($this->redirectTo == '/home')
-        if ($user->role == 1) {
-            return redirect()->route('admin.dashboard'); // Redirect admin to dashboard
-        }
-        else{
-            return redirect()->route('welcome.home');
-        }
 
-        //return redirect()->intended($this->redirectTo); // Redirect normal user to default path
-    }
-
-    protected function signIn(Request $request)
+    public function signIn(Request $request)
     {
-        // Validate the incoming request
-        $credentials = $request->validate([
+        // Validate request
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        try {
-            // Attempt to authenticate the user with the provided credentials
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Invalid credentials'], 401);
-            }
+        // Retrieve user from database
+        $user = User::where('email', $request->email)->first();
 
-            // Authentication successful: return the JWT token in the response
-            return response()->json([
-                'token' => $token,
-            ]);
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'Could not create token'], 500);
+        // Check if user exists and verify password
+        if ($user && \Hash::check($request->password, $user->password)) {
+            // Generate JWT token
+            $token = JWTAuth::fromUser($user);
+
+            // Return token as JSON response
+            return response()->json(['token' => $token]);
         }
+
+        // Return error if user not found or password is incorrect
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingHistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +53,11 @@ Route::post('/admin/bookings/addpayment', [BookingHistoryController::class, 'add
 
 
 Route::post('/api/signIn', [LoginController::class, 'signIn']);
+Route::post('/api/test', function(){
+    return response()->json(['error' => 'Could not create token'], 200);
+})->middleware(CheckRole::class . ':0');
+
+Route::get('/api/test2', function(){
+    return response()->json(['error' => 'Could not create token'], 500);
+});
+
