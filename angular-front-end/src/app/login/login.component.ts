@@ -11,6 +11,13 @@ import { AuthService } from '../auth.service'; // Import your AuthService
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
+  title = 'angular-front-end';
+
+  menuItems = [
+    { text: 'Home', url: '/' },
+    { text: 'Contact', url: '/' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,

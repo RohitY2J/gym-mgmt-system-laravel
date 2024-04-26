@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject  } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class AuthService {
         map(response => {
           if (response && response.token) {
             // Save the token in local storage or session storage
-            localStorage.setItem('token', response.token);
+            localStorage.setItem('authToken', response.token);
             this.authToken.next(response.token);
             return true;
           }
@@ -47,4 +48,20 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getAuthToken();
   }
+
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  getUserInfo(): any {
+    const token = this.getToken();
+    if (token) {
+      return jwtDecode(token);
+    }
+    return null;
+  }
+
+  // isLoggedIn(): boolean {
+  //   return !!this.getToken();
+  // }
 }
