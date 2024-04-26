@@ -5,19 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, UrlSerializer } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoryComponent } from './category/category.component';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import StandardUrlSerializer from './custom-url-serializer';
 
+
+const customUrlSerializer = new StandardUrlSerializer();
+
+const CustomUrlSerializerProvider = {
+  provide: UrlSerializer,
+  useValue: customUrlSerializer
+};
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    CategoryComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +40,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    { provide: UrlSerializer, useClass: StandardUrlSerializer }
   ],
   bootstrap: [AppComponent]
 })

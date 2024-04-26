@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         response => {
           // Handle successful login
           // Redirect user, set user data in a service, or take other appropriate actions
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/admin']);
         },
         error => {
           // Handle login error
