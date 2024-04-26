@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'https://localhost:8000'; // Replace with your API URL
+  private baseUrl = 'http://localhost:8000'; // Replace with your API URL
   private authToken = new BehaviorSubject<string | null>(null);
   authToken$ = this.authToken.asObservable();
 
@@ -16,7 +16,7 @@ export class AuthService {
   login(credentials: any): Observable<boolean> {
     //let email = credentials.email;
     //let password = credentials.password;
-    const url = `${this.baseUrl}/api/login`;
+    const url = `${this.baseUrl}/api/signIn`;
     //const body = { email, password };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -25,7 +25,7 @@ export class AuthService {
         map(response => {
           if (response && response.token) {
             // Save the token in local storage or session storage
-            localStorage.setItem('authToken', response.token);
+            localStorage.setItem('token', response.token);
             this.authToken.next(response.token);
             return true;
           }
