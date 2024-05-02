@@ -5,7 +5,8 @@ use App\Http\Controllers\PackageTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingHistoryController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,14 @@ Route::post('/admin/category/addcategory', [CategoryController::class,'addCatego
 Route::delete('/admin/category/deletecategory/{id}',[CategoryController::class,'deleteCategory'])->name('admin.category.deletecategory')->middleware('auth','admin');
 Route::post('/admin/package-type/addpackagetype', [PackageTypeController::class,'addPackageType'])->name('admin.package_type.addpackage')->middleware('auth','admin');
 Route::post('/admin/bookings/addpayment', [BookingHistoryController::class, 'addPayment'])->name('admin.booking_history.add_payment')->middleware('auth','admin');
+
+
+Route::post('/api/signIn', [LoginController::class, 'signIn']);
+Route::post('/api/test', function(){
+    return response()->json(['error' => 'Could not create token'], 200);
+})->middleware(CheckRole::class . ':0');
+
+Route::get('/api/test2', function(){
+    return response()->json(['error' => 'Could not create token'], 500);
+});
+
