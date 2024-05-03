@@ -58,6 +58,11 @@ Route::post('/api/signIn', [LoginController::class, 'signIn']);
 Route::get('/api/admin/getCategory',[CategoryController::class, 'getCategories'])->middleware(CheckRole::class . ':0');
 Route::post('/api/admin/category/add', [CategoryController::class, 'add']) -> middleware(CheckRole::class. ':0');
 Route::delete('/api/admin/category/delete/{id}', [CategoryController::class, 'deleteCategory'])->middleware(CheckRole::class. ':0');
+
+Route::post('/api/admin/package/get', [PackageTypeController::class, 'getPackageType'])->middleware(CheckRole::class. ':0');
+Route::post('/api/admin/addPackage', [PackageTypeController::class, 'addPackage'])->middleware(CheckRole::class. ':0');
+Route::delete('/api/admin/deletePackage/{id}', [PackageTypeController::class, 'deleteCategory'])->middleware(CheckRole::class. ':0');
+
 // Route::post('/api/test', function(){
 //     return response()->json(['error' => 'Could not create token'], 200);
 // })->middleware(CheckRole::class . ':0');

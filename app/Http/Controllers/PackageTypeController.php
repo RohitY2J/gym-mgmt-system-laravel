@@ -20,6 +20,50 @@ class PackageTypeController extends Controller
         return view("admin.package_type",["categories"=>$categories, "packages"=>$packages]);
     }
 
+    public function getPackageType(){
+        $categories = Category::all();
+        $packages = DB::table('membership_package_category')
+            ->join('categories', 'membership_package_category.category_id', '=', 'categories.id')
+            ->select('membership_package_category.*','categories.title as category')
+            ->get();
+        
+        return response()->json(["packages"=> $packages], 200);
+    }
+
+    public function addPackage(request $request){
+        $this->validateAddCategory($request);
+    
+        PackageCategory::create([
+            "name" => $request->name,
+            "category_id" => $request->category,
+            "price" => $request->price,
+            "duration" => $request->duration,
+            "time_unit" => $request->period
+        ]);
+
+        $categories = Category::all();
+        $packages = DB::table('membership_package_category')
+            ->join('categories', 'membership_package_category.category_id', '=', 'categories.id')
+            ->select('membership_package_category.*','categories.title as category')
+            ->get();
+
+        return response()->json(['message'=>'Package added successfully', 'packages'=>$packages],200);
+    }
+
+    public function deleteCategory($id)
+    {
+        $package = PackageCategory::findOrFail($id);
+        $package->delete();
+
+        $categories = Category::all();
+        $packages = DB::table('membership_package_category')
+            ->join('categories', 'membership_package_category.category_id', '=', 'categories.id')
+            ->select('membership_package_category.*','categories.title as category')
+            ->get();
+
+        return response()->json(['message' => 'Record deleted successfully', 'packages'=>$packages], 200);
+    }
+
     public function addPackageType(Request $request){ 
         $this->validateAddCategory($request);
     

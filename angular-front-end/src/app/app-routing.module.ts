@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { CategoryComponent } from './category/category.component';
+import { PackageComponent } from './package/package.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, outlet: 'admin' },
       { path: 'dashboard', component: DashboardComponent, outlet: 'admin'},
       { path: 'category', component: CategoryComponent, outlet: 'admin' },
-      //{ path: 'package-type', compon}
+      { path: 'package', component: PackageComponent, outlet: 'admin'}
     ],
     canActivate:[AuthGuard]
   },

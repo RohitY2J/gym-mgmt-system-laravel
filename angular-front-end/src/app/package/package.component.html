@@ -1,0 +1,111 @@
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false" #modalRef>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title">{{ title }}</h5> -->
+                <h5 class="modal-title">Package Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <ng-content></ng-content> -->
+                <form id="ngForm" #packageFormRef="ngForm" (ngSubmit)="submitForm()" [formGroup]="packageForm">
+                    <div>
+                        <label for="category"> Category </label>
+                        <select formControlName="category" class="form-select" id="category" required>
+                            <option value="">Select Category</option>
+                            <option *ngFor="let category of categories" [value]="category.id">{{ category.title }}</option>
+                        </select>
+                        <div *ngIf="packageForm.get('category').invalid && (packageForm.get('category').touched || packageFormRef.submitted)" class="invalid-feedback">
+                            Please select a category.
+                        </div>
+                    </div>
+                
+                    <div class="mt-3">
+                        <label for="name"> Package Name </label>
+                        <input formControlName="name" type="text" class="form-control" id="name" required>
+                        <div *ngIf="packageForm.get('name').invalid && (packageForm.get('name').touched || packageFormRef.submitted)" class="invalid-feedback">
+                            Please enter a package name.
+                        </div>
+                    </div>
+                
+                    <div class="mt-3">
+                        <label for="price"> Price </label>
+                        <input formControlName="price" type="number" class="form-control" id="price" required>
+                        <div *ngIf="packageForm.get('price').invalid && (packageForm.get('price').touched || packageFormRef.submitted)" class="invalid-feedback">
+                            Please enter a valid price.
+                        </div>
+                    </div>
+                
+                    <div class="mt-3">
+                        <label for="duration"> Duration </label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input formControlName="duration" type="number" class="form-control" id="duration" required>
+                                <div *ngIf="validate('duration')" class="invalid-feedback">
+                                    Please enter a valid duration.
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <select formControlName="period" class="form-select" id="period" required>
+                                    <option value="">Select Period</option>
+                                    <option *ngFor="let period of periodEnumArr" [value]="period.key">{{ period.value }}</option>
+                                </select>
+                                <div *ngIf="packageForm.get('period').invalid && (packageForm.get('period').touched || packageFormRef.submitted)" class="invalid-feedback">
+                                    Please select a period.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>                
+                  
+            </div>
+            <div class="modal-footer">
+                <button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" (click)="packageFormRef.ngSubmit.emit()">Submit</button>
+                <!-- <ng-content select="[name=buttonSlot]"></ng-content> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-4">
+    <div class="row justify-content-left">
+      <div class="col-md-12">
+        <h5> Package Type </h5>
+        <div class="card">
+          <div class="card-header">
+            <div class="navbar py-0" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                <button class="text-button" data-bs-toggle="modal" data-bs-target="#formModal"> Add </button>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body">
+            <table style="width: 100%;">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+              <tr *ngFor="let package of packages">
+                <td>{{ package.id }}</td>
+                <td>{{ package.name }}</td>
+                <td>{{ package.price }}</td>
+                <td>{{ package.duration }} {{ package.timeUnit }}</td>
+                <td>{{ package.category }}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="deletePackage(package.id)">Delete</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

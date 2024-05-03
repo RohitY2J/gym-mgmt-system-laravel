@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import StandardUrlSerializer from './custom-url-serializer';
+import { PackageComponent } from './package/package.component';
 
 
 const customUrlSerializer = new StandardUrlSerializer();
@@ -29,7 +30,8 @@ const CustomUrlSerializerProvider = {
     LoginComponent,
     DashboardComponent,
     CategoryComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    PackageComponent
   ],
   imports: [
     BrowserModule,
