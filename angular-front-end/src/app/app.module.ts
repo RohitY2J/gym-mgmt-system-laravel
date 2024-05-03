@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';

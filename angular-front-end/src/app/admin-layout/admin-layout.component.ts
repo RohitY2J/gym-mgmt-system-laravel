@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AdminLayoutComponent {
 
+  handleClick(param: any) {
+    console.log('Clicked with parameter:', param);
+  }
+
 }

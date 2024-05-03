@@ -16,8 +16,10 @@ const routes: Routes = [
     path: 'admin', 
     component: AdminLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent, outlet: 'admin' }, 
-      { path: 'category', component: CategoryComponent, outlet: 'admin' }
+      { path: '', component: DashboardComponent, outlet: 'admin' },
+      { path: 'dashboard', component: DashboardComponent, outlet: 'admin'},
+      { path: 'category', component: CategoryComponent, outlet: 'admin' },
+      //{ path: 'package-type', compon}
     ],
     canActivate:[AuthGuard]
   },

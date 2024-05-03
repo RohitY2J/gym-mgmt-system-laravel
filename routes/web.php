@@ -19,6 +19,8 @@ use App\Http\Middleware\CheckRole;
 |
 */
 
+$ROLE = config('constants.ROLE');
+
 Route::get('/', function () {
     return view('home_custom');
 })->name('welcome.home');
@@ -53,11 +55,14 @@ Route::post('/admin/bookings/addpayment', [BookingHistoryController::class, 'add
 
 
 Route::post('/api/signIn', [LoginController::class, 'signIn']);
-Route::post('/api/test', function(){
-    return response()->json(['error' => 'Could not create token'], 200);
-})->middleware(CheckRole::class . ':0');
+Route::get('/api/admin/getCategory',[CategoryController::class, 'getCategories'])->middleware(CheckRole::class . ':0');
+Route::post('/api/admin/category/add', [CategoryController::class, 'add']) -> middleware(CheckRole::class. ':0');
+Route::delete('/api/admin/category/delete/{id}', [CategoryController::class, 'deleteCategory'])->middleware(CheckRole::class. ':0');
+// Route::post('/api/test', function(){
+//     return response()->json(['error' => 'Could not create token'], 200);
+// })->middleware(CheckRole::class . ':0');
 
-Route::get('/api/test2', function(){
-    return response()->json(['error' => 'Could not create token'], 500);
-});
+// Route::get('/api/test2', function(){
+//     return response()->json(['error' => 'Could not create token'], 500);
+// });
 
