@@ -16,6 +16,7 @@ import { CategoryComponent } from './category/category.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import StandardUrlSerializer from './custom-url-serializer';
 import { PackageComponent } from './package/package.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 const customUrlSerializer = new StandardUrlSerializer();
@@ -31,7 +32,8 @@ const CustomUrlSerializerProvider = {
     DashboardComponent,
     CategoryComponent,
     AdminLayoutComponent,
-    PackageComponent
+    PackageComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

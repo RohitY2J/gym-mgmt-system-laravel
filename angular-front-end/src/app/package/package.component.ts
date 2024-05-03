@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../service/category/category.service';
 import { PackageService } from '../service/package/package.service';
 import $ from 'jquery';
+import { LoadingService } from '../service/helper/loading.service';
 
 @Component({
   selector: 'app-package',
@@ -26,9 +27,13 @@ export class PackageComponent {
 
   constructor(private fb: FormBuilder, 
     private categoryService: CategoryService, 
-    private packageService: PackageService) { }
+    private packageService: PackageService,
+    private loadingService: LoadingService) { }
 
   ngOnInit(): void {
+
+    this.loadingService.setLoadingState(true);
+
     this.packageForm = this.fb.group({
       category: ['', Validators.required],
       name: ['', Validators.required],
@@ -43,21 +48,27 @@ export class PackageComponent {
 
     this.packageService.getPackages(this.filter).subscribe((data: any)=> {
       this.packages = data.packages;
+      this.loadingService.setLoadingState(false);
     })
   }
   
   submitForm() {
     if (this.packageForm.valid) {
       // Submit form logic goes here
+      this.loadingService.setLoadingState(true);
       this.packageService.addPackage(this.packageForm.value).subscribe((response) => {
         if(response){
 
           this.packages = response['packages'];
           $('#closeButton').click();
+
+          this.loadingService.setLoadingState(false);
         }
       },(error) => {
         // Handle errors here
         console.error('Error:', error);
+        this.loadingService.setLoadingState(false);
+
       }
     );
     } else {
@@ -68,13 +79,18 @@ export class PackageComponent {
 
   deletePackage(id: string): void {
     // Implement deletion logic
+    this.loadingService.setLoadingState(true);
+
     this.packageService.deletePackage(id).subscribe(response=>{
       if(response){
         this.packages = response['packages'];
+        this.loadingService.setLoadingState(false);
+
       }
     },
     error=> {
-      
+      this.loadingService.setLoadingState(false);
+
     })
     
   }

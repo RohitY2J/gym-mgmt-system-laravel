@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryService } from '../service/category/category.service';
+import { LoadingService } from '../service/helper/loading.service';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +13,10 @@ export class CategoryComponent {
   newCategory: any = {};
   successMessage: string = '';
 
-  constructor(private categoryService: CategoryService) { } // Inject your category service here
+  constructor(
+    private categoryService: CategoryService,
+    private loadingService: LoadingService
+  ) { } // Inject your category service here
 
   ngOnInit(): void {
     this.loadCategories();
@@ -20,8 +24,10 @@ export class CategoryComponent {
 
   loadCategories() {
     // Call your category service to fetch categories
+    this.loadingService.setLoadingState(true);
     this.categoryService.getCategories().subscribe((data: any) => {
       this.categories = data;
+      this.loadingService.setLoadingState(false);
     });
   }
 
@@ -36,8 +42,11 @@ export class CategoryComponent {
 
   deleteCategory(categoryId: number) {
     // Call your category service to delete the category
+    this.loadingService.setLoadingState(false);
+
     this.categoryService.deleteCategory(categoryId).subscribe(() => {
       this.successMessage = 'Category deleted successfully.';
+      this.loadingService.setLoadingState(false);
       this.loadCategories(); // Refresh the categories list
     });
   }
